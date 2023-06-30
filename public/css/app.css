@@ -297,15 +297,15 @@
   color: #fff;
 }
 
-body {
+.body {
   font-family: "Lato", sans-serif;
   -webkit-font-smoothing: antialiased;
   color: #232323;
+
 }
 
 nav li:last-child a {
-  background: #CA362B;
-  inline-size: 70px;
+  background: #fe5f1e;
 }
 
 nav li:last-child a:hover {
@@ -345,7 +345,7 @@ section.hero {
 }
 
 .btn-primary {
-  background-color: red;
+  background-color: #fe5f1e;
   transition: all 0.3s ease-in-out;
 }
 
