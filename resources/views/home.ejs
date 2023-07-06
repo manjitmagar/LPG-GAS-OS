@@ -2,77 +2,51 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GAS APP</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"
-      rel="stylesheet"
-    >
-    <link
-      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
-      rel="stylesheet"
-  >
-
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/app.css">
   </head>
 
   <body>
-    
     <section class="hero py-16">
-      <div class="container mx-auto flex items-center justify-between">
-        <div class="w-1/2">
-          <h6 class="text-lg">
+      <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
+        <div class="w-full md:w-1/2 mb-8 md:mb-0">
+          <h6 class="text-lg text-center md:text-left">
             <em>Efficiency and Convenience at Your Fingertips</em>
           </h6>
-          <h1 class="text-6xl font-bold">Order Gas with Ease!!</h1>
-          <button
-            class="px-6 py-2 rounded-full text-white font-bold mt-4 btn-primary"
-          >
+          <h1 class="text-4xl md:text-6xl font-bold text-center md:text-left">Order Gas with Ease!!</h1>
+          <button class="px-6 py-2 rounded-full text-white font-bold mt-4 btn-primary mx-auto md:mx-0">
             Order Now
           </button> 
         </div>
-        <div class="w-1/2">
-          <img
-            src="/public/img/delivery_boy.png"
-            alt=""
-          >
+        <div class="w-full md:w-1/2">
+          <img src="/public/img/delivery_boy.png" alt="" class="mx-auto">
         </div>
       </div>
     </section>
+
     <section class="menu container mx-auto py-8">
-      <h1 class="text-xl font-bold mb-8">Our Products</h1>
-      <div class="grid grid-cols-4 col-gap-12 row-gap-16">
-        
+      <h1 class="text-xl font-bold mb-8 text-center">Our Products</h1>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <% gas.forEach(function(gas){ %>
-          
-        <div class="w-64">
-          <img
-            class="h-40 mb-4 mx-auto"
-            src="/public/img/<%=gas.image %>" alt=""
-          >
+        <div class="w-full">
+          <img class="h-40 mb-4 mx-auto" src="/public/img/<%=gas.image %>" alt="">
           <div class="text-center">
-            <h2 class="mb-4 text-lg"><%=gas.name %> </h2>
-            <span class="size py-1 px-4 rounded-full uppercase text-xs"
-              ><%=gas.size %></span
-            >
-            
+            <h2 class="mb-4 text-lg"><%=gas.name %></h2>
+            <span class="size py-1 px-4 rounded-full uppercase text-xs"><%=gas.size %></span>
             <div class="flex items-center justify-around mt-6">
-              <span class="font-bold text-lg ">NPRs <%= gas.price %></span>
-              <button data-gas="<%=JSON.stringify(gas) %>"
-                class="add-to-cart py-1 px-6 rounded-full flex items-center font-bold mx-auto"
-              >
+              <span class="font-bold text-lg">NPRs <%= gas.price %></span>
+              <button data-gas="<%=JSON.stringify(gas) %>" class="add-to-cart py-1 px-6 rounded-full flex items-center font-bold mx-auto">
                 <span>+</span>
                 <span class="ml-4">Add</span>
               </button>
             </div>
           </div>
         </div>
-
         <%}) %>
-        
-        
-        
-      
+      </div>
     </section>
   </body>
 </html>
