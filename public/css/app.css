@@ -297,11 +297,10 @@
   color: #fff;
 }
 
-.body {
+body {
   font-family: "Lato", sans-serif;
   -webkit-font-smoothing: antialiased;
   color: #232323;
-
 }
 
 nav li:last-child a {
@@ -425,7 +424,7 @@ section.status {
 }
 
 .status-box ul li:nth-child(3) span:before {
-  content: "\F818";
+  content: "\F4de";
 }
 
 .status-box ul li:nth-child(4) span:before {

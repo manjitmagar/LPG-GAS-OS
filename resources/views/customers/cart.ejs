@@ -15,9 +15,11 @@
               </h1>
               <span class="text-gray-500"> Regular</span>
             </div>
-            <span class="flex-1">
-              <%= gas.qty %> Pcs 
-            </span>
+            <div class="flex-1">
+              <button class="btn-quantity" onclick="decreaseQuantity('<%= gas.item.id %>')">-</button>
+              <span id="quantity<%= gas.item.id %>"><%= gas.qty %></span>
+              <button class="btn-quantity" onclick="increaseQuantity('<%= gas.item.id %>')">+</button>
+            </div>
             <span class="font-bold text-lg">NPRs <%= gas.item.price * gas.qty %></span>
           </div>
         <% } %>
@@ -42,8 +44,7 @@
                   <option value="fiat">Bhaktapur</option>
                   <option value="audi">LalitPur</option>
                 </select>
-
-              -->
+                -->
 
                 <div>
                   <button class="btn-primary px-6 py-2 rounded-full text-white font-bold mt-6" type="submit">
@@ -98,5 +99,39 @@
       .catch(error => {
         console.log('Error:', error);
       });
+  }
+
+  // Function to increase the quantity
+  function increaseQuantity(itemId) {
+    const quantityElement = document.getElementById('quantity' + itemId);
+    let quantity = parseInt(quantityElement.innerHTML);
+    quantity++;
+    quantityElement.innerHTML = quantity;
+    updateTotalPrice();
+  }
+
+  // Function to decrease the quantity
+  function decreaseQuantity(itemId) {
+    const quantityElement = document.getElementById('quantity' + itemId);
+    let quantity = parseInt(quantityElement.innerHTML);
+    if (quantity > 1) {
+      quantity--;
+      quantityElement.innerHTML = quantity;
+      updateTotalPrice();
+    }
+  }
+
+  // Function to update the total price
+  function updateTotalPrice() {
+    const quantities = document.querySelectorAll('[id^=quantity]');
+    const prices = document.querySelectorAll('.font-bold.text-lg');
+    let totalPrice = 0;
+    for (let i = 0; i < quantities.length; i++) {
+      const quantity = parseInt(quantities[i].innerHTML);
+      const price = parseInt(prices[i].innerHTML.replace('NPRs ', ''));
+      totalPrice += quantity * price;
+    }
+    const totalAmountElement = document.querySelector('.amount');
+    totalAmountElement.innerHTML = 'NPRs ' + totalPrice;
   }
 </script>

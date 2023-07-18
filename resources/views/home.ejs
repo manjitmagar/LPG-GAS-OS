@@ -7,6 +7,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/app.css">
+    <script>
+      function scrollDown() {
+        window.scrollBy(0, 700); // Adjust the value (100) as needed to control the scroll distance
+      }
+    </script>
   </head>
 
   <body>
@@ -17,7 +22,7 @@
             <em>Efficiency and Convenience at Your Fingertips</em>
           </h6>
           <h1 class="text-4xl md:text-6xl font-bold text-center md:text-left">Order Gas with Ease!!</h1>
-          <button class="px-6 py-2 rounded-full text-white font-bold mt-4 btn-primary mx-auto md:mx-0">
+          <button onclick="scrollDown()" class="px-6 py-2 rounded-full text-white font-bold mt-4 btn-primary mx-auto md:mx-0">
             Order Now
           </button> 
         </div>

@@ -1,5 +1,5 @@
 {
-  "name": "LPG",
+  "name": "lpg",
   "version": "1.0.0",
   "description": "LPG Project",
   "main": "index.js",
@@ -21,13 +21,15 @@
     "express-ejs-layouts": "^2.5.1",
     "express-flash": "^0.0.2",
     "express-session": "^1.17.3",
+    "mapquest": "^0.2.0",
     "moment": "^2.29.4",
     "mongoose": "^7.3.1",
     "node-sass": "^9.0.0",
     "noty": "^3.2.0-beta-deprecated",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
-    "sass-loader": "^13.3.2"
+    "sass-loader": "^13.3.2",
+    "socket.io": "^4.7.1"
   },
   "devDependencies": {
     "laravel-mix": "^6.0.49",
