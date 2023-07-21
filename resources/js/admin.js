@@ -34,8 +34,8 @@ export function initAdmin(socket) {
   }
 
   function generateMarkup(orders) {
-    return orders
-      .map((order) => {
+    if( orders ){
+      return orders.map((order) => {
         return `
           <tr>
             <td class="border px-4 py-2 text-green-900">
@@ -79,6 +79,8 @@ export function initAdmin(socket) {
         `;
       })
       .join("");
+    }
+    return null;
   }
 
   // Socket event listener for 'orderPlaced'

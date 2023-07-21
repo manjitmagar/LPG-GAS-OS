@@ -4,6 +4,8 @@ import { initAdmin } from "./admin";
 import moment from "moment/moment";
 import { createElement } from "react";
 let addToCart = document.querySelectorAll(".add-to-cart");
+let decreaseQty = document.querySelectorAll(".decreaseQty");
+let increaseQty = document.querySelectorAll(".increaseQty");
 let cartCounter = document.querySelector("#cartCounter");
 
 function updateCart(gas) {
@@ -31,8 +33,8 @@ function updateCart(gas) {
 addToCart.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     let gas = JSON.parse(btn.dataset.gas);
-    updateCart(gas);
     console.log(gas);
+    updateCart(gas);
   });
 });
 
