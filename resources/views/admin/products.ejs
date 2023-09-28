@@ -1,0 +1,39 @@
+<section class="orders light-section">
+    <div class="container mx-auto pt-12">
+      <section class="profile py-16">
+        <div class="container mx-auto">
+          <h1 class="text-3xl -mt-12 font-bold -mb-10">Welcome To The Product List, </h1>
+          
+        </div>
+      </section>
+      <h1 class="font-bold text-lg mb-4">All Products</h1>
+
+      <% if (successMessage && successMessage.length > 0) { %>
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+          <strong class="font-bold">Success!</strong>
+          <span class="block sm:inline"><%= successMessage %></span>
+        </div>
+      <% } %>
+        
+      <% if (errorMessage && errorMessage.length > 0) { %>
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+          <strong class="font-bold">Error!</strong>
+          <span class="block sm:inline"><%= errorMessage %></span>
+        </div>
+      <% } %>
+
+      <table class="w-full table-auto bg-white">
+        <thead>
+          <tr>
+            <th class="px-4 py-2 text-left">Name</th>
+            <th class="px-4 py-2 text-left">Image</th>
+            <th class="px-4 py-2 text-left">Price</th>
+            <th class="px-4 py-2 text-left">Size</th>
+            <th class="px-4 py-2 text-left">Action</th>
+          </tr>
+        </thead>
+        <tbody id="productTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+  

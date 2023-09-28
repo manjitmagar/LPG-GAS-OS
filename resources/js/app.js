@@ -2,12 +2,13 @@ import axios from "axios";
 import Noty from "noty";
 import { initAdmin } from "./admin";
 import moment from "moment/moment";
-import { createElement } from "react";
+ 
+import { initStripe } from "./stripe";
+
 let addToCart = document.querySelectorAll(".add-to-cart");
+let cartCounter = document.querySelector("#cartCounter");
 let decreaseQty = document.querySelectorAll(".decreaseQty");
 let increaseQty = document.querySelectorAll(".increaseQty");
-let cartCounter = document.querySelector("#cartCounter");
-
 function updateCart(gas) {
   axios
     .post("/update-cart", gas)
@@ -33,8 +34,8 @@ function updateCart(gas) {
 addToCart.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     let gas = JSON.parse(btn.dataset.gas);
-    console.log(gas);
     updateCart(gas);
+    
   });
 });
 
@@ -45,8 +46,6 @@ if (alertMsg) {
     alertMsg.remove();
   }, 2000);
 }
-
-
 
 //Change Order Status
 let statuses = document.querySelectorAll(".status_line");
@@ -80,6 +79,11 @@ function updateStatus(order) {
 }
 updateStatus(order);
 
+
+
+initStripe()
+
+
 //socketClientSide
 let socket = io();
 
@@ -91,8 +95,8 @@ if (order) {
 let adminAreaPath = window.location.pathname;
 
 if (adminAreaPath.includes("admin")) {
-      initAdmin(socket);
-      socket.emit('join','adminRoom')
+  initAdmin(socket);
+  socket.emit("join", "adminRoom");
 }
 
 socket.on("orderUpdated", (data) => {
@@ -105,10 +109,6 @@ socket.on("orderUpdated", (data) => {
     timeout: 1000,
     progressBar: false,
     text: "Order Updated",
+    
   }).show();
 });
-
-
-
-
-

@@ -1,3 +1,34 @@
+<style>
+  .btn-quantity {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    border: 2px solid #333;
+    border-radius: 50%;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+    margin: 0 4px;
+  }
+
+  /* Style for "+" button */
+  .btn-quantity.increaseQty {
+    background-color: #4caf50;
+    color: #fff;
+  }
+
+  /* Style for "-" button */
+  .btn-quantity.decreaseQty {
+    background-color: #f44336;
+    color: #fff;
+  }
+
+ 
+
+</style>
+
+
+
 <section class="cart py-16">
   <% if(session.cart) { %>
     <div class="order container mx-auto w-1/2">
@@ -17,71 +48,94 @@
             </div>
             <div class="flex-1">
               <button class="btn-quantity decreaseQty" data-gas="<%=JSON.stringify(gas.item) %>">-</button>
-              <span>
+              <span class="text-lg">
                 <%= gas.qty %>
               </span>
               <button class="btn-quantity increaseQty" data-gas="<%=JSON.stringify(gas.item) %>">+</button>
             </div>
-            <span class="font-bold text-lg">NPRs <%= gas.item.price %></span>
+            <span class="font-bold text-lg">NPRs <%= gas.item.price * gas.qty  %></span>
           </div>
-          <% } %>
-            <hr />
-            <div class="text-right py-4">
-              <div>
-                <span class="text-lg font-bold">Total Amount</span>
-                <span id="total_cart_price" class="amount text-2xl font-bold ml-2">NPRs <%= session.cart.totalPrice %>
-                    </span>
-              </div>
-              <div>
-                <% if(user) { %>
-                  <form action="/orders" method="POST" class="mt-12">
-                    <input name="phone" class="border border-gray-400 p-2 w-1/2 mb-4" type="text"
-                      placeholder="Phone number" />
-                    <input name="address" id="addressInput" class="border border-gray-400 p-2 w-1/2" type="text"
-                      placeholder="Address" onclick="getUserLocation()" />
-                    <br>
-                    <br>
-                    <!--
-                <label for="location">Choose Your Location:</label>
-                <select id="location" class="border border-gray-400 p-2 w-1/2" type="text" placeholder="Address" name="Location">
-                  <option value="volvo">My Location</option>
-                  <option value="saab">Kathmandu</option>
-                  <option value="fiat">Bhaktapur</option>
-                  <option value="audi">LalitPur</option>
-                </select>
-                -->
-
-                    <div>
-                      <button class="btn-primary px-6 py-2 rounded-full text-white font-bold mt-6" type="submit">
-                        Order Now
-                      </button>
+        <% } %>
+        <hr />
+        <div class="text-right py-4">
+          <div>
+            <span class="text-lg font-bold">Total Amount</span>
+            <span id="total_cart_price" class="amount text-2xl font-bold ml-2">NPRs <%= session.cart.totalPrice %>
+            </span>
                     </div>
-                  </form>
-                  <% } else { %>
-                    <a href="/login"
-                      class="inline-block cursor-pointer btn-primary px-6 py-2 rounded-full text-white font-bold mt-6">
-                      Login to continue</a>
-                    <% } %>
-              </div>
+          <div>
+            <% if(user) { %>
+
+
+
+              <div>
+              <form action="/orders" method="POST" class="mt-12" id="payment-form">
+                <div class="relative w-1/2 ml-auto mb-4">
+
+                <select
+              id="paymentType"
+              name="paymentType"
+              class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded leading-tight focus:outline-none 
+              focus:shadow-outline"
+            >
+              <option value="cod">Cash on delivery</option>
+              <option value="card">Pay with card</option>
+            </select>
+            <div
+              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+            >
+              <svg
+                class="fill-current h-4 w-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                />
+              </svg>
             </div>
-      </div>
-      <% } else { %>
-        <div class="empty-cart py-16">
-          <div class="container mx-auto text-center">
-            <h1 class="text-3xl font-bold mb-2">Cart Empty 🥺</h1>
-            <p class="text-gray-500 text-lg mb-12">
-              You Probably haven't ordered an LPG Gas yet.<br>
-              To Order an LPG Gas, go to the main page.
-            </p>
-            <img class='w-1/5 mx-auto' src="https://cdn-icons-png.flaticon.com/512/10967/10967115.png" alt="empty-cart">
-            <a href="/"
-              class="inline-block px-6 py-2 rounded-full btn-primary text-primary text-white font-bold mt-12">Go
-              Back</a>
+          </div>
+
+
+
+
+
+
+
+                <input name="phone" class="border border-gray-400 p-2 w-1/2 mb-4" type="text" placeholder="Phone number" />
+                <input name="address" id="addressInput" class="border border-gray-400 p-2 w-1/2" type="text" placeholder="Address" onclick="getUserLocation()" />
+                <br>
+                <br>
+               
+              <div class="mt-4">
+                <div id="card-element"></div>
+
+                <div>
+                  <button class="btn-primary px-6 py-2 rounded-full text-white font-bold mt-6"  type="submit">
+                    Order Now
+                  </button>
+                </div>
+              </form>
+            <% } else { %>
+              <a href="/login" class="inline-block cursor-pointer btn-primary px-6 py-2 rounded-full text-white font-bold mt-6"> Login to continue</a>
+            <% } %>
           </div>
         </div>
-        <% } %>
+      </div>
+    <% } else { %>
+      <div class="empty-cart py-16">
+        <div class="container mx-auto text-center">
+          <h1 class="text-3xl font-bold mb-2">Cart Empty 🥺</h1>
+          <p class="text-gray-500 text-lg mb-12">
+            You Probably haven't ordered an LPG Gas yet.<br>
+            To Order an LPG Gas, go to the main page.
+          </p>
+          <img class='w-1/5 mx-auto' src="https://cdn-icons-png.flaticon.com/512/10967/10967115.png" alt="empty-cart">
+          <a href="/" class="inline-block px-6 py-2 rounded-full btn-primary text-primary text-white font-bold mt-12">Go Back</a>
+        </div>
+      </div>
+    <% } %>
 </section>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script>
   function getUserLocation() {
@@ -96,7 +150,7 @@
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
 
-
+    
     const url = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`;
 
     fetch(url)
@@ -110,7 +164,6 @@
         console.log('Error:', error);
       });
   }
-
   (function ($) {
     function update_cart_data(btn, type = '+') {
       let gas = btn.data('gas');
@@ -127,6 +180,10 @@
         success: function (res) {
           if (parseInt(res?.productQty)) {
             btn.parent().find("span").text(res.productQty);
+
+
+            
+
             $(document).find("#total_cart_price").text(`NPRs ${res.totalPrice}`);
           } else {
             window.location.href = window.location.href;
@@ -148,5 +205,6 @@
     $(document).on('click', '.decreaseQty', function () {
       update_cart_data($(this), '-');
     });
+    
   })(jQuery);
 </script>
